@@ -24,7 +24,13 @@ html, body {
     font-size: 14px;
     line-height: 22px;
       }
-
+      @media screen and (max-width: 600px) {
+        body,#mainContent {
+          font-size: 10px;
+          margin:0 !important;
+          width:100% !important;
+        }
+      }
       #mainContent{
         width:90%;
         margin: 0 5% 0 5%;
@@ -51,7 +57,12 @@ a:hover{color:#FFFF00;text-shadow:#CDCD00 0 0 5px;text-decoration:underline}
                 min-height: 95%;
 
               }
-
+              @media screen and (max-width: 1195px) {
+                #wrapper {
+                  width: 100%;
+                  margin:0;
+                }
+              }
               table,tr,td{
                 border:solid #f7cba47a 2px;
                 text-align:center;

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GTA to-do list</title>
+
+  <style>
+
+  html, body {
+    height: auto;
+    min-height:100%;
+  }
+  body {
+    min-height: 100%;
+    background-image: url('Pics/gtabg.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    margin: 0;
+    height:100vh;
+    color:#D5D4D4;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  @media screen and (max-width: 600px) {
+    body,#mainContent {
+      font-size: 10px;
+      margin:0 !important;
+      width:100% !important;
+    }
+  }
+
+  #mainContent{
+    width:90%;
+    margin: 0 5% 0 5%;
+  }
+
+
+
+
+  a {
+    color: #fec356;
+    text-decoration: none;
+  }
+
+  a:visited {
+    cursor: url(https://vignette.wikia.nocookie.net/gtawiki/images/b/b5/Cursor-GTAWiki-Active.png/revision/latest?cb=20190922225740),auto !important;
+  }
+  a:link {
+    cursor: url(https://vignette.wikia.nocookie.net/gtawiki/images/b/b5/Cursor-GTAWiki-Active.png/revision/latest?cb=20190922225740),auto !important;
+  }
+
+  a:hover{color:#FFFF00;text-shadow:#CDCD00 0 0 5px;text-decoration:underline}
+
+  #wrapper {
+    background-color:#3D3A34;
+    width:70%;
+    margin: 0 15% 0 15%;
+    min-height: 95%;
+
+  }
+  @media screen and (max-width: 1195px) {
+    #wrapper {
+      width: 100%;
+      margin:0;
+    }
+  }
+
+  table,tr,td{
+    border:solid #f7cba47a 2px;
+    text-align:center;
+
+  }
+
+  table{
+    width:100%;
+  }
+
+  h1{
+    text-align:center;
+  }
+
+  .header {
+    position: relative;
+
+  }
+  .header::before {
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    background-image: -moz-linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    background-image: -ms-linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    background-image: -o-linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    background-image: -webkit-linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    content:"\00a0";
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+
+  }
+
+  #banner{
+    border:none white 0 !important;
+    background-color: rgba(255, 255, 255, 1);
+    color:rgba(0,0,0,0.95);
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  #headerid{
+    width:100%;
+    height:100px;
+  }
+
+  #carpic{
+    width:40%;
+  }
+  #cargarageimage
+  {
+    width:100%;
+
+  }
+  #carname, #realcarname, #carpirce{
+    width:20%;
+  }
+
+  #footer{
+    width:100%;
+    background-color:black;
+    height:5%
+  }
+
+  #carimage{
+    width:100%;
+	padding-left: 4px;
+    padding-top: 10px;
+  }
+
+  label{
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 700;
+    text-align: center;
+width: 100%;
+padding-bottom: 5px;
+    display: inline-block;
+  }
+
+  #dropdownfilterLocation,#dropdownfilterType,#dropdownfilterMake{    margin-top: 20px;}
+
+
+  #filterbox{
+    text-align: center;
+    text-align: justify;
+    text-justify: inter-word;
+    width:300px;
+  }
+
+
+
+
+
+
+
+
+
+  .select-css {
+      display: block;
+      font-size: 16px;
+      font-family: sans-serif;
+      font-weight: 700;
+      color: #444;
+      line-height: 1.3;
+      padding: .6em 1.4em .5em .8em;
+      width: 100%;
+      max-width: 100%; /* useful when width is set to anything other than 100% */
+      box-sizing: border-box;
+      margin: 0;
+      border: 1px solid #aaa;
+      box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+      border-radius: .5em;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      background-color: #fff;
+      /* note: bg image below uses 2 urls. The first is an svg data uri for the arrow icon, and the second is the gradient.
+          for the icon, if you want to change the color, be sure to use `%23` instead of `#`, since it's a url. You can also swap in a different svg icon or an external image reference
+
+      */
+      background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+        linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+      background-repeat: no-repeat, repeat;
+      /* arrow icon position (1em from the right, 50% vertical) , then gradient position*/
+      background-position: right .7em top 50%, 0 0;
+      /* icon size, then gradient */
+      background-size: .65em auto, 100%;
+  }
+  /* Hide arrow icon in IE browsers */
+  .select-css::-ms-expand {
+      display: none;
+  }
+  /* Hover style */
+  .select-css:hover {
+      border-color: #FFFF00;
+
+      box-shadow: 0 0 5px 0 #CDCD00;
+
+  }
+  /* Focus style */
+  .select-css:focus {
+      border-color: #aaa;
+      /* It'd be nice to use -webkit-focus-ring-color here but it doesn't work on box-shadow */
+      box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+      box-shadow: 0 0 0 3px -moz-mac-focusring;
+      color: #222;
+      outline: none;
+  }
+
+  /* Set options to normal weight */
+  .select-css option {
+      font-weight:normal;
+  }
+
+  /* Support for rtl text, explicit support for Arabic and Hebrew */
+  *[dir="rtl"] .select-css, :root:lang(ar) .select-css, :root:lang(iw) .select-css {
+      background-position: left .7em top 50%, 0 0;
+      padding: .6em .8em .5em 1.4em;
+  }
+
+  /* Disabled styles */
+  .select-css:disabled, .select-css[aria-disabled=true] {
+      color: graytext;
+      background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22graytext%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+        linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+  }
+
+  .select-css:disabled:hover, .select-css[aria-disabled=true] {
+      border-color: #aaa;
+  }
+
+
+
+
+
+
+
+
+
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+
+function createfilterLocation(tableData){
+  var dropdown = $('<div id = "dropdownfilterLocation"></div>');
+  dropdown.append('<label for="garageName">Garage:</label>');
+  selectbox = $('<select class = "select-css" name="garageName" id="garageName" onchange="loadTable(this.options[this.selectedIndex].text)"></select>');
+
+  var usedOptions = [];
+  $(tableData).each(function (i, rowData) {
+    var option = null;
+    if(i==0){
+      option = 'All'
+    }
+    else{
+      $(rowData).each(function (j, cellData) {
+        if(j==0){
+          option = cellData;
+        }
+      });
+    }
+
+
+    if(!usedOptions.includes(option)){
+      var row = $('<option value="'+option+'">'+option+'</option>');
+      selectbox.append(row);
+      usedOptions.push(option);
+    }
+  });
+  dropdown.append(selectbox);
+  return dropdown;
+
+}
+
+function createfilterMake(tableData){
+  var dropdown = $('<div id = "dropdownfilterMake"></div>');
+  dropdown.append('<label for="makeName">Car Make:</label>');
+  selectbox = $('<select class = "select-css" name="makeName" id="makeName" onchange="loadTable(this.options[this.selectedIndex].text)"></select>');
+
+  var usedOptions = [];
+  $(tableData).each(function (i, rowData) {
+    var option = null;
+    if(i==0){
+      option = 'All'
+    }
+    else{
+      $(rowData).each(function (j, cellData) {
+        if(j==0){
+          option = cellData;
+        }
+      });
+    }
+
+
+
+      var row = $('<option value="'+option+'">'+option+'</option>');
+      selectbox.append(row);
+
+  });
+  dropdown.append(selectbox);
+  return dropdown;
+
+}
+
+
+function createfilterType(tableData){
+  var dropdown = $('<div id = "dropdownfilterType"></div>');
+  dropdown.append('<label for="cartype">Car Type:</label>');
+  selectbox = $('<select class = "select-css" name="cartype" id="cartype" onchange="loadTable(this.options[this.selectedIndex].text)"></select>');
+
+  var usedOptions = [];
+  $(tableData).each(function (i, rowData) {
+    var option = null;
+    if(i==0){
+      option = 'All'
+    }
+    else{
+      $(rowData).each(function (j, cellData) {
+        if(j==0){
+          option = cellData;
+        }
+      });
+    }
+
+
+    if(!usedOptions.includes(option)){
+      var row = $('<option value="'+option+'">'+option+'</option>');
+      selectbox.append(row);
+      usedOptions.push(option);
+    }
+  });
+  dropdown.append(selectbox);
+  return dropdown;
+
+}
+
+
+function arrayToTable(tableData) {
+  var table = $('<table id = "gargesList"></table>');
+  $(tableData).each(function (i, rowData) {
+    var output = '';
+    var row = $('<tr></tr>');
+
+    $(rowData).each(function (j, cellData) {
+      if(i != 0){
+        output = 'test';
+        switch(j) {
+          case 3:
+          output = '<td rowspan="2" style = "width:50%;"><img id = "cargarageimage" src = "Pics/'+cellData+'.png"></td>';
+          break;
+          output = '<td><a href = "#">'+cellData+'</a></td>';
+          break;
+          case 4:
+          output = '<td><a href = "#">'+cellData+'</a></td>';
+          break;
+          case 5:
+          output = '<td><a href = "#">'+cellData+'</a></td>';
+          break;
+          case 6:
+          output = '<td><a href = "#">'+cellData+'</a></td>';
+          break;
+          case 7:
+          output = '<td><a href = "#">'+cellData+'</a></td>';
+          break;
+          case 8:
+          output = '<td><a href = "#">'+cellData+'</a></td>';
+          break;
+          case 9:
+          output = '<td><a href = "#">'+cellData+'</a></td>';
+          break;
+          case 10:
+          default:
+          break;
+        };
+
+        if(j==7){
+          table.append(row);
+          row = $('<tr></tr>');
+        };
+
+        row.append($(output));
+
+      }
+      else {
+
+      };
+
+    });
+    table.append(row);
+  });
+  return table;
+}
+
+function arrayToTableFilter(tableData, filter) {
+  var table = $('<table id = "gargesList"></table>');
+  $(tableData).each(function (i, rowData) {
+    var row = $('<tr></tr>');
+    var checker = 0
+var output = '';
+    checker = 0
+    $(rowData).each(function (j, cellData) {
+
+      if(i != 0){
+        output = 'test';
+        switch(j) {
+          case 0:
+          if(cellData == filter || i == 0){
+            checker = 1
+          };
+          break;
+          case 1:
+          if(cellData == filter || i == 0){
+            checker = 1
+          };
+          break;
+          case 2:
+          if(cellData == filter || i == 0){
+            checker = 1
+          };
+          break;
+          case 3:
+          output = '<td rowspan="2" style = "width:50%;"><img id = "cargarageimage" src = "Pics/'+cellData+'.png"></td>';
+          break;
+          output = '<td><a href = "#">'+cellData+'</a></td>';
+          break;
+          case 4:
+          output = '<td><a href = "#">'+cellData+'</a></td>';
+          break;
+          case 5:
+          output = '<td><a href = "#">'+cellData+'</a></td>';
+          break;
+          case 6:
+          output = '<td><a href = "#">'+cellData+'</a></td>';
+          break;
+          case 7:
+          output = '<td><a href = "#">'+cellData+'</a></td>';
+          break;
+          case 8:
+          output = '<td><a href = "#">'+cellData+'</a></td>';
+          break;
+          case 9:
+          output = '<td><a href = "#">'+cellData+'</a></td>';
+          break;
+          case 10:
+          default:
+
+          break;
+        };
+        if(checker==1){
+        if(j==7){
+          table.append(row);
+          row = $('<tr></tr>');
+        };
+
+        row.append($(output));
+};
+      }
+      else {
+
+      };
+
+    });
+    if(checker==1){
+    table.append(row);
+  };
+  });
+  return table;
+}
+
+
+$.ajax({
+  type: "GET",
+  url: "https://jannesroos.github.io/carrotcup/Data/lesley.csv",
+  success: function (data) {
+    $('#filterbox').append(createfilterMake(Papa.parse(data).data));
+  }
+});
+$.ajax({
+  type: "GET",
+  url: "https://jannesroos.github.io/carrotcup/Data/chelsea.csv",
+  success: function (data) {
+    $('#filterbox').append(createfilterType(Papa.parse(data).data));
+  }
+});
+$.ajax({
+  type: "GET",
+  url: "https://jannesroos.github.io/carrotcup/Data/jannes.csv",
+  success: function (data) {
+    $('#filterbox').append(createfilterLocation(Papa.parse(data).data));
+  }
+});
+
+
+
+
+
+function loadTable(filter)
+{
+  var oldList = document.getElementById("gargesList");
+  oldList.remove();
+  if(filter == 'All')
+  {
+    $.ajax({
+      type: "GET",
+      url: "https://jannesroos.github.io/gta/Data/CarLsit.csv",
+      success: function (data) {
+        $('#mainContent').append(arrayToTable(Papa.parse(data).data));
+      }
+    });
+  }
+  else{
+    $.ajax({
+      type: "GET",
+      url: "https://jannesroos.github.io/gta/Data/CarLsit.csv",
+      success: function (data) {
+        $('#mainContent').append(arrayToTableFilter(Papa.parse(data).data, filter));
+      }
+    });
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</head>
+<body>
+  <div id = "wrapper">
+    <div >
+      <div>
+        <table id = "banner">
+          <tr id = "banner">
+            <td id = "banner">
+              <a href = "index.html">  GTA Online</a>
+            </td>
+            <td id = "banner">
+              <a href = "cars.html">Cars</a>
+            </td>
+            <td id = "banner">
+              <a href = "garage.html">Garage</a>
+            </td>
+          </tr>
+        </table>
+
+      </div>
+      <div class="header">
+        <img id = "headerid" src="Pics/header.jpg" />
+      </div>
+    </div>
+
+    <div id = "mainContent">
+      <center>
+        <div id = "filterbox">
+
+        </div>
+      </center>
+
+
+
+
+
+
+      <h1>Personal Vehicles</h1>
+
+
+
+    </div>
+  </div>
+
+
+
+
+  <div id = "footer">
+    Made by Jannes
+  </div>
+
+</body>
+
+
+
+
+</html>
